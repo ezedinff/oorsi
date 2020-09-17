@@ -1,0 +1,31 @@
+<ion-list>
+  <ion-item>
+    <div padding class="center-aligned">
+      <img class="profile-picture" tappable src="{{user?.profilePictureName | oorsiImgURL}}" (click)="profilePictureClicked()"
+        *ngIf="editAllowed">
+      <img class="profile-picture" src="{{user?.profilePictureName | oorsiImgURL}}" *ngIf="!editAllowed">
+      <h4 color="primary">{{user?.firstName}} {{user?.lastName}}</h4>
+    </div>
+    <div>
+      <button *ngIf="user?.following" (click)="onFollow()">Following</button>
+      <button (click)="onFollow()" *ngIf="!user?.following">Follow</button>
+    </div>
+    <ion-grid>
+      <ion-row>
+        <ion-col col-6 tappable (click)="showFollowers()">
+          <div class="center-aligned">
+            <span>Followers</span>
+            <h4>{{user?.numberOfFollowers}}</h4>
+          </div>
+        </ion-col>
+        <ion-col col-6 tappable (click)="showFollowing()">
+          <div class="center-aligned">
+            <span>Following</span>
+            <h4>{{user?.numberOfFollowed}}</h4>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+  </ion-item>
+</ion-list>

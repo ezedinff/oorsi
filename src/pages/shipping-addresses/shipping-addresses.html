@@ -1,0 +1,46 @@
+<!--
+  Generated template for the ShippingAddressesPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-title>Shipping addresses</ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="addShippingAddress()">
+        <ion-icon name="md-add"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+
+</ion-header>
+
+
+<ion-content padding>
+  <div class="spinner" *ngIf="loading == true">
+    <ion-spinner name="bubbles"></ion-spinner>
+  </div>
+
+  <ion-card *ngFor="let address of addresses" tappable (click)="shippingAddressOptions(address)">
+    <ion-card-header>
+      {{address.name}}
+    </ion-card-header>
+
+    <ion-card-content>
+      {{address.address1}}
+      <br />
+      <span *ngIf="address.address2"> {{address.address2}}</span>
+      <br *ngIf="address.address2" />
+      <span>{{address.city}}, {{address.state}} {{address.zip}}</span>
+      <br *ngIf="address.default" />
+      <span *ngIf="address.default" item-left>Default Shipping Address</span>
+    </ion-card-content>
+  </ion-card>
+  <div *ngIf="loading==false && addresses.length == 0">You have no Shipping Address saved. </div>
+  <button ion-button (click)="addShippingAddress()">Add Shipping Method</button>
+
+
+</ion-content>

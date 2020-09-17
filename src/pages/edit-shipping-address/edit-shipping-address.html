@@ -1,0 +1,78 @@
+<ion-header>
+
+  <ion-navbar color="primary">
+    <button ion-button (click)="dismiss()">
+      Close
+    </button>
+    <ion-title>Edit Shipping Address</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list class="list-form" [formGroup]="myForm">
+    <ion-input type="hidden" formControlName="id"></ion-input>
+
+    <ion-item *ngIf="errorText">
+      <label class="invalid">{{errorText}}</label>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Name *</ion-label>
+      <ion-input type="text" formControlName="name" [class.invalid]="!myForm.controls.name.valid  && (myForm.controls.name.dirty || submitAttempt)"></ion-input>
+    </ion-item>
+    <p class="fieldError" *ngIf="myForm.controls.name.errors?.required  && (myForm.controls.name.dirty || submitAttempt)">Name Required</p>
+    <p class="fieldError" *ngIf="myForm.controls.name.errors?.remote  && (myForm.controls.name.dirty || submitAttempt)">{{myForm.controls.name.errors?.remote}}</p>
+
+    <ion-item>
+      <ion-label floating>Address 1 *</ion-label>
+      <ion-input type="text" formControlName="address1" [class.invalid]="!myForm.controls.address1.valid  && (myForm.controls.address1.dirty || submitAttempt)"></ion-input>
+    </ion-item>
+    <p class="fieldError" *ngIf="myForm.controls.address1.errors?.required  && (myForm.controls.address1.dirty || submitAttempt)">Address 1 Required</p>
+    <p class="fieldError" *ngIf="myForm.controls.address1.errors?.remote  && (myForm.controls.address1.dirty || submitAttempt)">{{myForm.controls.name.errors?.remote}}</p>
+
+    <ion-item>
+      <ion-label floating>Address 2
+        <small>(Optional)</small>
+      </ion-label>
+      <ion-input type="text" formControlName="address2" [class.invalid]="!myForm.controls.address2.valid  && (myForm.controls.address2.dirty || submitAttempt)"></ion-input>
+    </ion-item>
+    <p class="fieldError" *ngIf="myForm.controls.address2.errors?.remote  && (myForm.controls.address2.dirty || submitAttempt)">{{myForm.controls.name.errors?.remote}}</p>
+
+    <ion-item>
+      <ion-label floating>City *</ion-label>
+      <ion-input type="text" formControlName="city" [class.invalid]="!myForm.controls.city.valid  && (myForm.controls.city.dirty || submitAttempt)"></ion-input>
+    </ion-item>
+    <p class="fieldError" *ngIf="myForm.controls.city.errors?.required  && (myForm.controls.city.dirty || submitAttempt)">city Required</p>
+    <p class="fieldError" *ngIf="myForm.controls.city.errors?.remote  && (myForm.controls.city.dirty || submitAttempt)">{{myForm.controls.name.errors?.remote}}</p>
+
+    <ion-item>
+      <ion-label floating>State *</ion-label>
+      <ion-input type="text" formControlName="state" [class.invalid]="!myForm.controls.state.valid  && (myForm.controls.state.dirty || submitAttempt)"></ion-input>
+    </ion-item>
+    <p class="fieldError" *ngIf="myForm.controls.state.errors?.required  && (myForm.controls.state.dirty || submitAttempt)">State Required</p>
+    <p class="fieldError" *ngIf="myForm.controls.state.errors?.remote  && (myForm.controls.state.dirty || submitAttempt)">{{myForm.controls.name.errors?.remote}}</p>
+
+    <ion-item>
+      <ion-label floating>Zip *</ion-label>
+      <ion-input type="text" formControlName="zip" [class.invalid]="!myForm.controls.zip.valid  && (myForm.controls.zip.dirty || submitAttempt)"></ion-input>
+    </ion-item>
+    <p class="fieldError" *ngIf="myForm.controls.zip.errors?.required  && (myForm.controls.zip.dirty || submitAttempt)">Zip Code Required</p>
+    <p class="fieldError" *ngIf="myForm.controls.zip.errors?.remote  && (myForm.controls.zip.dirty || submitAttempt)">{{myForm.controls.name.errors?.remote}}</p>
+
+
+    <ion-item>
+      <ion-label floating>Phone Number *</ion-label>
+      <ion-input type="text" formControlName="phoneNumber" [class.invalid]="!myForm.controls.phoneNumber.valid  && (myForm.controls.phoneNumber.dirty || submitAttempt)"></ion-input>
+    </ion-item>
+    <p class="fieldError" *ngIf="myForm.controls.phoneNumber.errors?.required  && (myForm.controls.phoneNumber.dirty || submitAttempt)">Phone Number Required</p>
+    <p class="fieldError" *ngIf="myForm.controls.phoneNumber.errors?.remote  && (myForm.controls.phoneNumber.dirty || submitAttempt)">{{myForm.controls.name.errors?.remote}}</p>
+
+  </ion-list>
+  <div class="spinner" *ngIf="loading == true">
+    <ion-spinner name="bubbles"></ion-spinner>
+  </div>
+
+  <button ion-button color="primary" block (click)="submit()" [disabled]="loading">Save Shipping Address</button>
+
+</ion-content>

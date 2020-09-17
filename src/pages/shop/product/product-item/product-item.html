@@ -1,0 +1,23 @@
+<ion-item class="product" (click)="onClick()">
+  <ion-thumbnail item-left>
+    <img src="{{ product?.image }}">
+  </ion-thumbnail>
+  <!--item's information-->
+  <div>
+    <div text-wrap>{{ product?.name }}</div>
+    <div>
+      <span color="danger">{{ product?.salePrice | currency:'USD' }}</span>
+      <small class="text-decoration" *ngIf="product?.salePrice!=product?.regularPrice">{{ product?.regularPrice | currency:'USD' }}</small>
+      <small class="discount-rate" color="danger" *ngIf="product?.salePrice!=product?.regularPrice">{{ discountPercent(product?.regularPrice, product?.salePrice) }}%</small>
+    </div>
+
+    <!--<div class="bottom-info text-sm">
+          <span color="gray" class="pull-left" *ngIf="item.shipping == 0">Free shipping</span>
+          <span color="gray" class="pull-left" *ngIf="item.shipping != 0">Shipping: {{ item.shipping | currency:'USD'}}</span>
+          <span color="gray" class="pull-right">
+            {{ item.num_orders }} Orders
+          </span>
+          <div class="clear"></div>
+        </div>-->
+  </div>
+</ion-item>

@@ -1,0 +1,135 @@
+<!--
+  Generated template for the ActivityDetail page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-buttons start>
+      <button ion-button icon-only menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>{{activity?.user.firstName}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content *ngIf="loading == true">
+  <div class="spinner">
+    <ion-spinner name="bubbles"></ion-spinner>
+  </div>
+</ion-content>
+
+
+<ion-content padding *ngIf="loading != true">
+
+  <ion-card *ngIf="activity && activity.activityType == 'WLP'">
+    <ion-item>
+      <ion-avatar item-left tappable (click)='openProfile(activity?.user)'>
+        <img src="{{activity?.user.profilePictureName | oorsiImgURL}}">
+      </ion-avatar>
+      <span tappable (click)='openProfile(activity?.user)'>{{activity?.user.firstName}} {{activity?.user.lastName}}</span>
+      <span class="message"> added to wish list</span>
+      <p>{{activity?.updated | date: 'MMM dd HH:mma'}}</p>
+    </ion-item>
+
+    <img class="product-image" src="{{activity?.product.image}}" tappable (click)="openProduct(activity?.product,activity?.user)">
+
+    <ion-card-content tappable (click)="openProduct(activity?.product, activity?.user)">
+      <p>{{activity?.product.name}}</p>
+    </ion-card-content>
+
+    <ion-row>
+      <ion-col>
+        <button ion-button icon-left clear small tappable (click)="toggleLike(activity);$event.stopPropagation();" [class.unliked]="!activity?.liked"
+          [class.liked]="activity?.liked">
+        <ion-icon name="thumbs-up"></ion-icon>
+        <div >{{activity?.numberOfLikes}} Likes</div>
+      </button>
+      </ion-col>
+      <ion-col>
+        <button ion-button icon-left clear small color="dark">
+        <ion-icon name="text"></ion-icon>
+        <div>{{activity?.numberOfComments}} Comments</div>
+      </button>
+      </ion-col>
+      <ion-col center text-center>
+        <ion-note>
+          {{activity?.updated | amTimeAgo}}
+        </ion-note>
+      </ion-col>
+    </ion-row>
+
+  </ion-card>
+
+  <ion-card *ngIf="activity && activity.activityType == 'FOLLOW'">
+    <ion-item>
+      <ion-avatar item-left tappable (click)='openProfile(activity?.user)'>
+        <img src="{{activity?.user.profilePictureName | oorsiImgURL}}">
+      </ion-avatar>
+      <span tappable (click)='openProfile(activity?.user)'>{{activity?.user.firstName}} {{activity?.user.lastName}}</span>
+      <span class="message"> started following </span>
+      <p>{{activity?.updated | date: 'MMM dd HH:mma'}}</p>
+    </ion-item>
+
+
+    <div class="center-aligned" tappable (click)='openProfile(activity?.followed)'>
+      <img class="profile-picture" src="{{followed?.profilePictureName | oorsiImgURL}}">
+      <h4 color="primary">{{activity?.followed.firstName}} {{activity?.followed.lastName}}</h4>
+    </div>
+
+    <ion-row>
+      <ion-col>
+        <button ion-button icon-left clear small tappable (click)="toggleLike(activity);$event.stopPropagation();" [class.unliked]="!activity?.liked"
+          [class.liked]="activity?.liked">
+        <ion-icon name="thumbs-up"></ion-icon>
+        <div >{{activity?.numberOfLikes}} Likes</div>
+      </button>
+      </ion-col>
+      <ion-col>
+        <button ion-button icon-left clear small color="dark">
+        <ion-icon name="text"></ion-icon>
+        <div>{{activity?.numberOfComments}} Comments</div>
+      </button>
+      </ion-col>
+      <ion-col center text-center>
+        <ion-note>
+          {{activity?.updated | amTimeAgo}}
+        </ion-note>
+      </ion-col>
+    </ion-row>
+
+  </ion-card>
+
+  <ion-list>
+
+    <ion-item *ngFor="let comment of comments">
+      <ion-row>
+        <ion-col col-2>
+          <ion-avatar item-left>
+            <img src="{{comment.user?.profilePictureName | oorsiImgURL}}">
+          </ion-avatar>
+        </ion-col>
+        <ion-col col-6>
+          <span>{{comment.user?.firstName}} {{comment.user?.lastName}}</span></ion-col>
+        <ion-col col-4>
+          <ion-note>{{comment.updated | amTimeAgo}}</ion-note>
+        </ion-col>
+      </ion-row>
+
+      <p class='small comment-text'>{{comment.comment}}</p>
+    </ion-item>
+
+  </ion-list>
+
+
+
+</ion-content>
+<ion-footer>
+  <div class="comment-div">
+    <input class= "comment-input" type="text" placeholder="Comment" [(ngModel)]="comment" />
+    <button class="button button-clear" (click)="postComment()">
+        Send
+      </button></div>
+</ion-footer>

@@ -1,0 +1,69 @@
+<ion-menu [content]="nav">
+
+    <ion-content class="menu-left">
+        <!-- User profile -->
+        <div padding class="menu-left menu-bg">
+            <a menuClose *ngIf="isAuthenticated" (click)="openPage(profilePage)">
+                <img class="profile-picture" src="{{loggedInUser?.profilePictureName | oorsiImgURL}}">
+                <!--<img class="profile-picture" src="assets/img/user/adam.jpg" *ngIf="!loggedInUser?.profilePictureName">-->
+                <h4 color="light">{{loggedInUser?.firstName}} {{loggedInUser?.lastName}}</h4>
+            </a>
+        </div>
+
+        <ion-list class="list-full-border">
+            <button ion-item menuClose (click)="openPage(tabsPage)">
+        <ion-icon item-left name="ios-home-outline"></ion-icon>
+        Home
+        <ion-badge color="danger" item-right ></ion-badge>
+      </button>
+            <button ion-item menuClose (click)="openPage(ordersPage)" *ngIf="isAuthenticated">
+        <ion-icon item-left name="ios-timer-outline"></ion-icon>
+        Orders
+        <ion-badge color="danger" item-right></ion-badge>
+      </button>
+
+            <button ion-item menuClose (click)="login()" *ngIf="!isAuthenticated">
+        <ion-icon item-left name="ios-log-in-outline"></ion-icon>
+        Login
+        <ion-badge color="danger" item-right ></ion-badge>
+      </button>
+            <button ion-item menuClose (click)="register()" *ngIf="!isAuthenticated">
+        <ion-icon item-left name="ios-log-in-outline"></ion-icon>
+        Signup
+        <ion-badge color="danger" item-right ></ion-badge>
+      </button>
+            <button ion-item menuClose (click)="openPage(myAccountPage)" *ngIf="isAuthenticated">
+        <ion-icon item-left name="contact"></ion-icon>
+        My Account
+        <ion-badge color="danger" item-right ></ion-badge>
+      </button>
+            <button ion-item menuClose (click)="logout()" *ngIf="isAuthenticated">
+        <ion-icon item-left name="ios-log-out-outline"></ion-icon>
+        Logout
+        <ion-badge color="danger" item-right></ion-badge>
+      </button>
+            <ion-item-divider bgColor>OTHERS</ion-item-divider>
+
+            <button ion-item menuClose (click)="about()">
+        <ion-icon item-left name="information-circle"></ion-icon>
+        About
+        <ion-badge color="danger" item-right></ion-badge>
+      </button>
+            <button ion-item menuClose (click)="share()">
+                <ion-icon item-left name="md-share"></ion-icon>
+                Invite friend
+            </button>
+            <button ion-item menuClose (click)="about()">
+                <ion-icon item-left name="send"></ion-icon>
+                Send feedback
+            </button>
+            <button ion-item menuClose (click)="feedback()">
+                <ion-icon item-left name="star"></ion-icon>
+                Rate us
+            </button>
+        </ion-list>
+    </ion-content>
+</ion-menu>
+
+
+<ion-nav [root]="tabsPage" #nav></ion-nav>

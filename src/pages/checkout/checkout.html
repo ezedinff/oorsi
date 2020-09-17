@@ -1,0 +1,131 @@
+<ion-header>
+
+  <ion-navbar color="primary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Checkout for {{user?.firstName}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content class=" common-bg cart">
+
+  <div class="spinner" *ngIf="loading == true">
+    <ion-spinner name="bubbles"></ion-spinner>
+  </div>
+
+  <ion-list [formGroup]="myForm">
+    <ion-card>
+      <ion-card-header>
+        Payment Method
+      </ion-card-header>
+      <ion-card-content>
+        <ion-item>
+          <ion-label>Card</ion-label>
+          <ion-select formControlName="paymentMethod" [class.invalid]="!myForm.controls.paymentMethod.valid && submitAttempt">
+            <ion-option *ngFor="let card of paymentMethods" value="{{card.id}}">{{card.brand}} ending in {{card.last4}}</ion-option>
+          </ion-select>
+        </ion-item>
+        <button ion-button (click)="addPaymentMethod()">Add Payment Method</button>
+        <p class="invalid" *ngIf="!myForm.controls.paymentMethod.valid && submitAttempt">Please Select Payment Method</p>
+      </ion-card-content>
+
+    </ion-card>
+
+    <ion-card>
+      <ion-card-header>
+        Shipping Address
+      </ion-card-header>
+      <ion-card-content>
+        <ion-list>
+          <ion-item>
+            <ion-label>Ship to</ion-label>
+            <ion-select formControlName="shipTo">
+              <ion-option value="1">Me</ion-option>
+              <ion-option value="2">{{user?.firstName}} {{user?.lastName}}</ion-option>
+            </ion-select>
+          </ion-item>
+          <ion-item *ngIf="myForm.controls.shipTo.value==1">
+            <ion-label>Shipping address</ion-label>
+            <ion-select formControlName="shippingAddress" [class.invalid]="!myForm.controls.shippingAddress.valid && submitAttempt">
+              <ion-option *ngFor="let address of addresses" value="{{address.id}}"> {{address.address1}}</ion-option>
+            </ion-select>
+          </ion-item>
+          <button ion-button (click)="addShippingAddress()">Add Shpping Address</button>
+          <p class="invalid" *ngIf="(!myForm.controls.shippingAddress.valid) && submitAttempt">Please Select Shipping Method</p>
+        </ion-list>
+
+      </ion-card-content>
+
+    </ion-card>
+
+
+    <ion-card *ngIf="user?.cartProducts.length>0">
+
+      <ion-card-header>
+        Products
+      </ion-card-header>
+      <ion-card-content>
+        <ion-list class="list-full-border" no-margin>
+
+          <ion-item class="product" *ngFor="let item of user.cartProducts">
+            <ion-thumbnail item-left>
+              <img src="{{ item.product.image }}">
+            </ion-thumbnail>
+            <!--item's information-->
+            <div>
+              <div text-wrap>{{ item.product.name }}</div>
+              <!--<div class="text-sm">
+            <span color="gray">{{ item.options.join(',') }}</span>
+          </div>-->
+              <div padding-bottom>
+                <span class="pull-right">{{ item.product.salePrice | currency:'USD' }}</span>
+                <div class="clear"></div>
+              </div>
+            </div>
+          </ion-item>
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
+  </ion-list>
+
+
+</ion-content>
+
+<!--<ion-footer padding>
+  <div>
+    <span class="pull-left" color="gray">Total</span>
+    <span class="pull-right bold" color="danger">{{ user?.totalPrice() | currency:'USD' }}</span>
+    <div class="clear"></div>
+  </div>
+  <div class="cart-footer" padding>
+    <ion-buttons end>
+      <button ion-button (click)="placeOrder()" color="danger" block>Place Order for {{user?.firstName}} {{user?.lastName}}</button>
+    </ion-buttons>
+  </div>
+
+</ion-footer>-->
+
+<ion-footer class="cart-footer">
+  <ion-grid padding>
+    <ion-row>
+      <ion-col col-5>
+        <ion-title>
+          <span ion-text color="gray">Total</span>
+          <br/>
+          <span class="bold" ion-text color="danger">{{ user?.totalPrice() | currency:'USD' }}</span>
+        </ion-title>
+      </ion-col>
+
+      <ion-col col-7>
+        <ion-buttons end>
+          <button ion-button (click)="placeOrder()" color="danger">
+     Place Order for {{user?.firstName}}
+    </button>
+        </ion-buttons>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-footer>

@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-buttons start>
+      <button ion-button icon-only menuToggle><ion-icon name="menu"></ion-icon></button>
+    </ion-buttons>
+    <ion-title>OOrsi Shop</ion-title>
+    <ion-buttons end>
+      <add-to-cart-button></add-to-cart-button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+
+
+
+<ion-content>
+
+  <ion-searchbar [(ngModel)]="searchString" (search)="onSearch()" [showCancelButton]="true">
+  </ion-searchbar>
+
+  <div class="spinner" *ngIf="loading == true">
+    <ion-spinner name="bubbles"></ion-spinner>
+  </div>
+
+  <!--List of items-->
+  <ion-list no-margin class="list-full-border list-products list" [ngClass]="{'grid': viewType == 'grid', 'list': viewType == 'list'}">
+    <page-product-item *ngFor="let product of products" [product]="product"></page-product-item>
+  </ion-list>
+
+
+</ion-content>

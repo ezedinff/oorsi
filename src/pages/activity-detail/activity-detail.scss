@@ -1,0 +1,63 @@
+page-activity-detail {
+
+
+    .comment-text{
+        white-space: initial;
+    }
+
+
+    .comment-div{
+        padding:8px;
+        width:100%;
+        background: rgba(0, 0, 0, 0.2);
+    }
+    .comment-input{
+        border-radius: 5px;
+        height: 3rem;
+        font-size: 1.4rem;
+        font-weight: 400;
+        color: #000;
+        background-color: #fff;
+    }
+
+     div.spinner {
+ width: 100%;
+ text-align: center;
+}
+
+           .message {
+    overflow: inherit;
+    margin: 0 0 2px;
+    font-size: 1.4rem;
+    line-height: normal;
+    text-overflow: inherit;
+    color: #8e9093;
+
+    
+}
+
+
+.product-image{
+    max-height: 120px;
+    width:auto;
+      display: block;
+    margin: 0 auto;
+}
+
+.profile-picture{
+ display: inline;
+}
+
+.center-aligned{
+        text-align: center;
+    }
+
+    .liked{
+       color: color($colors, primary);
+    }
+
+     .unliked{
+       color: color($colors, dark);
+    }
+
+}

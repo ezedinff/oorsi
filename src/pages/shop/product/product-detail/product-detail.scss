@@ -1,0 +1,52 @@
+page-product-detail {
+
+
+  div.spinner {
+ width: 100%;
+ text-align: center;
+}
+
+
+    .item {
+  ion-slides {
+    height: auto;
+
+    .product-image {
+      float: left;
+      max-height: 240px;
+      width: auto;
+      display: block;
+      margin: 0 auto;
+    }
+    
+    
+  }
+
+  .btn-wish-list {
+    position: absolute;
+    top: -20px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    z-index: 1000;
+    right: 1rem;
+  }
+
+  .item-stats {
+    ion-col + ion-col {
+      border-left: 1px solid color($colors, bgColor);
+    }
+  }
+
+}
+
+
+
+    .product-image-wrapper{
+      width:100%;
+      height: 100%;
+      text-align: center;
+    }
+}
+
+

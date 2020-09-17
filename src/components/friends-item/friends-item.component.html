@@ -1,0 +1,10 @@
+<ion-card>
+  <div tappable ion-item (click)="openUserProfile()">
+    <ion-avatar item-left>
+      <img src="{{user?.profilePictureName | oorsiImgURL}}">
+    </ion-avatar>
+    <span>{{user?.firstName}} {{user?.lastName}}</span>
+    <button ion-button item-right (click)="onFollow(user); $event.stopPropagation();" [class.followed]="this.user?.followed"
+      [class.not-followed]="!this.user?.followed">{{followButtonText}}</button>
+  </div>
+</ion-card>

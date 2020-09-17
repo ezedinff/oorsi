@@ -1,0 +1,31 @@
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-buttons start>
+      <button ion-button icon-only menuToggle>
+        <ion-icon name="back"></ion-icon>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>Profile</ion-title>
+    <ion-buttons end>
+      <add-to-cart-button></add-to-cart-button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+<ion-content>
+  <div *ngIf="isLoggedIn==false">
+    <p>You are not logged in</p>
+    <button ion-button color="primary" block type="submit" [disabled]="loading" (click)="login()">LOGIN</button>
+    <div>or</div>
+    <button ion-button color="primary" block (click)="register()" [disabled]="loading">Create Account</button>
+
+  </div>
+  <ion-list *ngIf="isLoggedIn==true">
+    <ion-item>
+      <oorsi-user-profile [user]="user"></oorsi-user-profile>
+    </ion-item>
+    <oorsi-mobile-activities [activities]="activities"></oorsi-mobile-activities>
+  </ion-list>
+</ion-content>

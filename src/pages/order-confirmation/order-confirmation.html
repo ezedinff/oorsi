@@ -1,0 +1,66 @@
+<ion-header>
+
+  <ion-navbar color="primary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Order for {{order?.forUser.firstName}} {{order?.forUser.lastName}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content class=" common-bg">
+  <ion-list>
+    <ion-card>
+      <ion-list>
+        <ion-item>
+          <ion-label>Total</ion-label>
+          <ion-label>{{order?.totalPrice | currency:'USD':'1.2-2'}}</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>Ordered Date</ion-label>
+          <ion-label>{{order?.date | date: 'dd/MM/yyyy hh:mm a'}}</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>Shipping Address</ion-label>
+          <ion-label>{{order?.shippingAddress?.formattedAddress}}</ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card>
+
+
+    <ion-card>
+
+      <ion-card-header>
+        Products
+      </ion-card-header>
+      <ion-card-content>
+        <ion-list class="list-full-border" no-margin>
+
+          <ion-item class="product" *ngFor="let orderProduct of order?.orderProducts">
+            <ion-thumbnail item-left>
+              <img src="{{ orderProduct.product.largeThumbnailImage }}">
+            </ion-thumbnail>
+            <div>
+              <div text-wrap>{{ orderProduct.product.name }}</div>
+              <div padding-bottom>
+                <span class="pull-right">{{ orderProduct.soldPrice | currency:'USD' }}</span>
+                <div class="clear"></div>
+              </div>
+              <div padding-bottom>
+                <span class="pull-right">{{ orderProduct.quantiy }}</span>
+                <div class="clear"></div>
+              </div>
+              <div padding-bottom>
+              <span class="pull-right">{{orderProduct.totalPrice| currency:'USD':'1.2-2'}}</span>
+                <div class="clear"></div>
+              </div>
+            </div>
+          </ion-item>
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
+  </ion-list>
+
+
+</ion-content>

@@ -1,0 +1,52 @@
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-buttons start><button ion-button icon-only menuToggle><ion-icon name="menu"></ion-icon></button></ion-buttons>
+    <ion-title>Login</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding class="login">
+
+
+  <form #form="ngForm" (submit)="onLogin(form)">
+    <ion-list class="list-form">
+
+      <ion-item>
+        <ion-label floating>Email</ion-label>
+        <ion-input type="email" name="email" ngModel></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label floating>Password</ion-label>
+        <ion-input type="password" name="password" ngModel></ion-input>
+      </ion-item>
+      <p class="error-message" margin-top margin-bottom *ngFor="let error of errors">{{error.message}}</p>
+    </ion-list>
+
+    <button ion-button color="primary" block type="submit" [disabled]="loading">LOGIN</button>
+  </form>
+  <div text-right margin-top margin-bottom (click)="forgotPassword()" tappable>Forgot password?</div>
+
+  <!-- <button ion-button icon-left block color="facebook" class="align-left" (click)="onFacebookLoginClick()" [disabled]="loading">
+    <ion-icon name="logo-facebook"></ion-icon>
+    Signin with Facebook
+  </button> -->
+
+  <div class="spinner" *ngIf="loading == true">
+    <ion-spinner name="bubbles"></ion-spinner>
+  </div>
+
+  <div class="align-bottom" padding text-center>
+    No Account? <span class="bold" (click)="register()">Register</span>
+  </div>
+
+  <ion-footer>
+    <div class="align-bottom" padding text-center>
+      No Account? <span class="bold" (click)="register()">Register</span>
+    </div>
+  </ion-footer>
+
+
+</ion-content>

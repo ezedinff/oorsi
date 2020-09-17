@@ -1,0 +1,38 @@
+oorsi-mobile-activities {
+
+        .message {
+    overflow: inherit;
+    margin: 0 0 2px;
+    font-size: 1.4rem;
+    line-height: normal;
+    text-overflow: inherit;
+    color: #8e9093;
+
+    
+}
+
+
+.product-image{
+    max-height: 120px;
+    width:auto;
+      display: block;
+    margin: 0 auto;
+}
+
+.profile-picture{
+ display: inline;
+}
+
+.center-aligned{
+        text-align: center;
+    }
+
+    .liked{
+       color: color($colors, primary);
+    }
+
+     .unliked{
+       color: color($colors, dark);
+    }
+
+}

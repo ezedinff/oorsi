@@ -1,0 +1,42 @@
+<ion-header>
+
+    <ion-navbar color="primary">
+        <ion-buttons start>
+            <button ion-button icon-only menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+        </ion-buttons>
+        <ion-title>Add Birthday</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+<ion-content padding class="login">
+
+
+    <form #form="ngForm" (submit)="save(form)">
+        <ion-list class="list-form">
+            <ion-item>
+                <ion-label floating>Birthday</ion-label>
+                <ion-datetime displayFormat="MMM DD YYYY" name="birthDate"></ion-datetime>
+            </ion-item>
+            <p class="error-message" margin-top margin-bottom *ngFor="let error of errors">{{error.message}}</p>
+        </ion-list>
+
+        <button ion-button color="primary" block type="submit" [disabled]="loading">Save</button>
+    </form>
+
+
+
+    <div class="spinner" *ngIf="loading == true">
+        <ion-spinner name="bubbles"></ion-spinner>
+    </div>
+
+    <ion-footer>
+        <div class="align-bottom" padding text-center>
+            <span class="bold" (click)="skip()">Skip</span>
+        </div>
+    </ion-footer>
+
+
+</ion-content>

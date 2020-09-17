@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Friends</ion-title>
+    <ion-buttons end *ngIf="loggedIn==true">
+      <button ion-button color="facebook" (click)="facebookFriends()">
+        <ion-icon name="logo-facebook"></ion-icon>
+      </button>
+      <button ion-button (click)="contactFriends()">
+        <ion-icon name="contacts"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+  <div *ngIf="loggedIn==true">
+    <friend-search-input start [searchString]="''" #seachInput></friend-search-input>
+    <div class="spinner" *ngIf="loading == true">
+      <ion-spinner name="bubbles"></ion-spinner>
+    </div>
+    <ion-list>
+      <oorsi-mobile-friends-item [user]="user" *ngFor="let user of users" (profileEmitter)="openProfile($event)"></oorsi-mobile-friends-item>
+    </ion-list>
+  </div>
+  <div *ngIf="loggedIn==true && loading==false && users.length==0">
+    <span center block> Looks like you have no friends on OOrsi.</span>
+    <button ion-button center color="primary" block (click)="seachInput.setFocus()">Search for friends</button>
+    <span center block>or</span>
+    <button ion-button icon-left center color="facebook" class="align-left" (click)="facebookFriends()">
+      <ion-icon name="logo-facebook"></ion-icon>
+      Search your Facebook Friends
+    </button>
+
+  </div>
+  <div *ngIf="loggedIn==false">
+    <div block text-center>To see/invite your friends please Login or Register</div>
+    <button ion-button color="primary" (click)="login()">Login</button>
+    <div block text-center>or</div>
+    <button ion-button color="primary" (click)="register()">Register</button>
+  </div>
+
+</ion-content>

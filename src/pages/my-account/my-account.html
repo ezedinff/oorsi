@@ -1,0 +1,63 @@
+<ion-header>
+
+  <ion-navbar color="primary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>My Account</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+
+
+<ion-content>
+
+  <div *ngIf="isLoggedIn==false">
+    <p>You are not logged in</p>
+    <button ion-button color="primary" block type="submit" [disabled]="loading" (click)="login()">LOGIN</button>
+    <div>or</div>
+    <button ion-button color="primary" block (click)="register()" [disabled]="loading">Create Account</button>
+
+  </div>
+
+  <!-- Profile -->
+  <ion-item-group *ngIf="isLoggedIn==true">
+    <ion-item class="no-border" tappable (click)="openMyProfilePage()">
+      <ion-avatar item-left>
+        <img src="{{loggedInUser?.profilePictureName | oorsiImgURL}}">
+      </ion-avatar>
+      <span class="strong">{{loggedInUser?.firstName}} {{loggedInUser?.lastName}}</span>
+    </ion-item>
+
+    <ion-item-divider bgColor>PROFILE</ion-item-divider>
+
+    <ion-item (click)="changePassword()" tappable>
+      <ion-icon name="lock"></ion-icon>
+      Change password
+    </ion-item>
+
+    <ion-item (click)="addPhoneNumber()" tappable>
+      <ion-icon name="phone"></ion-icon>
+      Change password
+    </ion-item>
+
+
+  </ion-item-group>
+
+  <!-- Other -->
+  <ion-item-group *ngIf="isLoggedIn==true">
+    <ion-item-divider bgColor>OTHERS</ion-item-divider>
+    <ion-item (click)="shippingMethods()" tappable>
+      <ion-icon name="md-navigate"></ion-icon>
+      Shipping Addresses
+    </ion-item>
+
+    <ion-item (click)="paymentCards()" tappable>
+      <ion-icon name="card"></ion-icon>
+      Payment Cards
+    </ion-item>
+
+  </ion-item-group>
+</ion-content>

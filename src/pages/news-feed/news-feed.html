@@ -1,0 +1,46 @@
+<ion-header>
+    <ion-navbar color="primary">
+        <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+        <ion-title>News Feed</ion-title>
+        <ion-buttons end *ngIf="loggedIn==true">
+            <button ion-button color="facebook">
+        <ion-icon name="logo-facebook"></ion-icon>
+      </button>
+            <button ion-button>
+        <ion-icon name="contacts"></ion-icon>
+      </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+
+
+<ion-content>
+    <div *ngIf="isLoggedIn==true">
+        <div class="spinner" *ngIf="loading == true">
+            <ion-spinner name="bubbles"></ion-spinner>
+        </div>
+        <ion-refresher (ionRefresh)="doRefresh($event)">
+            <ion-refresher-content pullingText="Pull to refresh..." refreshingText="Refreshing...">
+            </ion-refresher-content>
+        </ion-refresher>
+        <oorsi-mobile-activities [activities]="activities"></oorsi-mobile-activities>
+    </div>
+    <div *ngIf="isLoggedIn==true && activities.length==0">
+        <ion-refresher (ionRefresh)="doRefresh($event)">
+            <ion-refresher-content pullingText="Pull to refresh..." refreshingText="Refreshing...">
+            </ion-refresher-content>
+        </ion-refresher>
+        <div>Add more friends to see their shopping activity</div>
+        <button ion-button color="primary" block type="button" [disabled]="loading" (click)="addBirthday()">Add Birthday</button>
+    </div>
+    <div *ngIf="isLoggedIn==false">
+        <p>You are not logged in</p>
+        <button ion-button color="primary" block type="submit" [disabled]="loading" (click)="login()">LOGIN</button>
+        <div>or</div>
+        <button ion-button color="primary" block (click)="register()" [disabled]="loading">Create Account</button>
+
+    </div>
+</ion-content>

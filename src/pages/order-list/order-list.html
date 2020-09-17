@@ -1,0 +1,65 @@
+<ion-header>
+
+  <ion-navbar color="primary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>My Orders</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding class="my-order common-bg">
+
+  <div *ngIf="isLoggedIn==false">
+    <p>You are not logged in</p>
+    <button ion-button color="primary" block type="submit" [disabled]="loading" (click)="login()">LOGIN</button>
+    <div>or</div>
+    <button ion-button color="primary" block (click)="register()" [disabled]="loading">Create Account</button>
+
+  </div>
+
+  <div class="spinner" *ngIf="loading == true && isLoggedIn==true">
+    <ion-spinner name="bubbles"></ion-spinner>
+  </div>
+
+  <div class="spinner" *ngIf="loading == false && orders.length == 0 && isLoggedIn==true">
+    No Orders Yet!
+  </div>
+
+  <div class="card light-bg" margin-top *ngFor="let order of orders">
+    <div class="card-header" padding>
+      <div>Ordered for:
+        <a>{{order.forUser.firstName}} {{order.forUser.lastName}}</a>
+      </div>
+    </div>
+    <div class="card-header" padding>
+      <div>Order Id: {{order.id}}</div>
+      <div>Order Time: {{order.date | date: 'MM/dd/yyyy hh:mm a'}}</div>
+    </div>
+
+    <ion-list class="list-full-border" no-margin>
+      <ion-item class="product" *ngFor="let orderProduct of order.orderProducts">
+        <ion-thumbnail item-left>
+          <img src="{{ orderProduct.product.image }}">
+        </ion-thumbnail>
+        <div>
+          <div text-wrap>{{ orderProduct.product.name }}</div>
+          <div padding-bottom>
+            <span class="pull-right">{{ orderProduct.soldPrice | currency:'USD' }} x {{ orderProduct.quantity }}</span>
+            <div class="clear"></div>
+          </div>
+        </div>
+      </ion-item>
+    </ion-list>
+
+    <div class="card-footer" padding>
+      <div>
+        <span class="pull-left" color="gray">Total</span>
+        <span class="pull-right bold" color="danger">{{ order.totalPrice | currency:'USD' }}</span>
+        <div class="clear"></div>
+      </div>
+    </div>
+  </div>
+</ion-content>

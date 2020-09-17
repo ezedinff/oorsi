@@ -1,0 +1,22 @@
+version: 0.2
+phases:
+  install:
+    runtime-versions:
+      nodejs: 10
+  pre_build:
+    commands:
+      - echo Installing source NPM dependencies...
+      - npm install
+      - npm install -g @ionic/cli
+      - npm install -g cordova
+  build:
+    commands:
+      - echo Build started on `date`
+      - ionic cordova build android --device
+  post_build:
+     commands:
+      - echo Build completed on `date`
+artifacts:
+  files:
+    - admin-api/target/admin-api.war
+  discard-paths: yes

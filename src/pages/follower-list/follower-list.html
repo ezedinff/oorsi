@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Followers</ion-title>
+    <ion-buttons end *ngIf="loggedIn==true">
+      <facebook-friends-button></facebook-friends-button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+  <div class="spinner" *ngIf="loading == true">
+    <ion-spinner name="bubbles"></ion-spinner>
+  </div>
+  <ion-list>
+    <oorsi-mobile-friends-item [user]="user" *ngFor="let user of users" (profileEmitter)="openProfile($event)"></oorsi-mobile-friends-item>
+  </ion-list>
+</ion-content>

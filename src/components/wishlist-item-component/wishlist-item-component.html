@@ -1,0 +1,20 @@
+<ion-item class="product" (click)="viewItem()" tappable>
+  <ion-thumbnail item-left>
+    <img src="{{ item.product.image }}">
+  </ion-thumbnail>
+  <!--item's information-->
+  <div>
+    <div text-wrap>{{ item.product.name }}</div>
+    <div>
+      <span color="danger">{{ item.product.salePrice | currency:'USD' }}</span>
+    </div>
+    <div class="origin-price text-sm" *ngIf="item.regularPrice != item.salePrice">
+      <span class="text-decoration">{{ item.product.price | currency:'USD' }}</span>
+      <span *ngIf="item.sale_price" class="discount-rate" color="danger">{{ discountPercent(item.product.price, item.product.sale_price) }}%</span>
+    </div>
+    <div class="bottom-info text-lg" padding-right *ngIf="showRemoveButton">
+      <ion-icon name="trash" color="gray" class="pull-right" (click)="onDelete();$event.stopPropagation();"></ion-icon>
+      <div class="clear"></div>
+    </div>
+  </div>
+</ion-item>

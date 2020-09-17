@@ -1,0 +1,17 @@
+page-checkout {
+
+    ion-select{
+        max-width: 100%;
+    }
+
+    .cart-footer{
+        background: #FBFBFB;
+  border-top: 1px solid color($colors, bgColor);
+    }
+
+    div.spinner {
+ width: 100%;
+ text-align: center;
+}
+
+}

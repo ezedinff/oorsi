@@ -1,0 +1,80 @@
+<div tappable (click)="activityClicked()" *ngIf="activity && activity.activityType == 'WLP'">
+  <ion-card>
+    <ion-item>
+      <ion-avatar item-left>
+        <img src="{{activity?.user.profilePictureName | oorsiImgURL}}">
+      </ion-avatar>
+      <span>{{activity?.user.firstName}} {{activity?.user.lastName}}</span><span class="message"> added to wish list</span>
+      <p>{{activity?.updated | amTimeAgo}}</p>
+    </ion-item>
+
+    <img class="product-image" src="{{activity?.product.image}}">
+
+    <ion-card-content>
+      <p>{{activity?.product.name}}</p>
+    </ion-card-content>
+
+    <ion-row>
+      <ion-col>
+        <button ion-button icon-left clear small (click)="toggleLike(activity);$event.stopPropagation();" [class.unliked]="!activity?.liked"
+          [class.liked]="activity?.liked">
+        <ion-icon name="thumbs-up"></ion-icon>
+        <div >{{activity?.numberOfLikes}} Likes</div>
+      </button>
+      </ion-col>
+      <ion-col>
+        <button ion-button icon-left clear small color="dark">
+        <ion-icon name="text"></ion-icon>
+        <div>{{activity?.numberOfComments}} Comments</div>
+      </button>
+      </ion-col>
+      <ion-col center text-center>
+        <ion-note>
+          {{activity?.updated | date:'fullDate' }}
+        </ion-note>
+      </ion-col>
+    </ion-row>
+
+  </ion-card>
+</div>
+<div tappable (click)="activityClicked()" *ngIf="activity && activity.activityType == 'FOLLOW'">
+
+  <ion-card>
+    <ion-item>
+      <ion-avatar item-left>
+        <img src="{{activity?.user.profilePictureName | oorsiImgURL}}">
+      </ion-avatar>
+      <span>{{activity?.user.firstName}} {{activity?.user.lastName}}</span><span class="message"> started following </span>
+      <p>{{activity?.updated | amTimeAgo}}</p>
+    </ion-item>
+
+
+    <div class="center-aligned">
+      <img class="profile-picture" src="{{followed?.profilePictureName | oorsiImgURL}}">
+      <h4 color="primary">{{activity?.followed.firstName}} {{activity?.followed.lastName}}</h4>
+    </div>
+
+    <ion-row>
+      <ion-col>
+        <button ion-button icon-left clear small (click)="toggleLike(activity);$event.stopPropagation();" [class.unliked]="!activity?.liked"
+          [class.liked]="activity?.liked">
+        <ion-icon name="thumbs-up"></ion-icon>
+        <div >{{activity?.numberOfLikes}} Likes</div>
+      </button>
+      </ion-col>
+      <ion-col>
+        <button ion-button icon-left clear small color="dark">
+        <ion-icon name="text"></ion-icon>
+        <div>{{activity?.numberOfComments}} Comments</div>
+      </button>
+      </ion-col>
+      <ion-col center text-center>
+        <ion-note>
+          {{activity?.updated | date:'fullDate' }}
+        </ion-note>
+      </ion-col>
+    </ion-row>
+
+  </ion-card>
+
+</div>

@@ -1,0 +1,12 @@
+{
+    "name": "OOrsi",
+    "integrations": {
+        "cordova": {}
+    },
+    "type": "ionic-angular",
+    "proxies": [{
+        "path": "/oorsi-api",
+        "proxyUrl": "http://anteneh-home.asuscomm.com:8080/oorsi-api/"
+    }],
+    "id": "c72a021f"
+}

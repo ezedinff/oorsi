@@ -1,0 +1,77 @@
+<ion-header>
+
+  <ion-navbar color="primary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Cart</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content class=" common-bg">
+
+  <div class="spinner" *ngIf="loading == true">
+    <ion-spinner name="bubbles"></ion-spinner>
+  </div>
+  <ion-card class="card" margin-top *ngFor="let user of users" [hidden]="!user.cartProducts.length">
+    <div class="card-header" padding>
+      Buying for:
+      <span class="primary-color">{{ user.firstName }} {{ user.lastName }}</span>
+    </div>
+
+    <ion-list class="list-full-border" no-margin>
+      <ion-item class="product" *ngFor="let item of user.cartProducts">
+        <ion-thumbnail item-left>
+          <img src="{{ item.product.image }}">
+        </ion-thumbnail>
+        <!--item's information-->
+        <div>
+          <div text-wrap>{{ item.product.name }}</div>
+          <!--<div class="text-sm">
+            <span color="gray">{{ item.options.join(',') }}</span>
+          </div>-->
+          <div padding-bottom>
+            <span class="pull-right">{{ item.product.salePrice | currency:'USD' }}</span>
+            <div class="clear"></div>
+          </div>
+          <div>
+            <div class="input-qty">
+              <span class="btn" (click)="decreaseQuantity(item); $event.stopPropagation();">
+                <ion-icon name="ios-remove"></ion-icon>
+              </span>
+              <input type="number" [(ngModel)]="item.quantity" disabled>
+              <span class="btn" (click)="increaseQuantity(item); $event.stopPropagation();">
+                <ion-icon name="ios-add"></ion-icon>
+              </span>
+              <button ion-button color="gray" (click)="updateQuantity(item); $event.stopPropagation();"> Update</button>
+              <div class="clear"></div>
+            </div>
+            <div class="pull-right bottom-info text-lg trash-btn">
+              <ion-icon name="trash" color="gray" class="pull-right" (click)="onDeleteCartProduct(item); $event.stopPropagation();"></ion-icon>
+              <div class="clear"></div>
+            </div>
+          </div>
+        </div>
+      </ion-item>
+    </ion-list>
+
+
+    <div class="card-footer" padding>
+      <div>
+        <span class="pull-left" color="gray">Total</span>
+        <span class="pull-right bold" color="danger">{{ user.totalPrice() | currency:'USD' }}</span>
+        <div class="clear"></div>
+      </div>
+      <div class="cart-footer" padding>
+        <ion-buttons end>
+          <button ion-button (click)="checkout(user.userID)" color="danger">Checkout for {{user.firstName}} {{user.lastName}}</button>
+        </ion-buttons>
+      </div>
+
+    </div>
+
+  </ion-card>
+
+
+</ion-content>

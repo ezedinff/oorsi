@@ -1,0 +1,42 @@
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-buttons start>
+      <button ion-button icon-only menuToggle>
+        <ion-icon name="menu"></ion-icon>
+        </button>
+    </ion-buttons>
+    <ion-title>OOrsi Shop</ion-title>
+    <ion-buttons end>
+      <add-to-cart-button></add-to-cart-button>
+      <button ion-button (click)="scanBarcode()" *ngIf="canScan">
+        <ion-icon name="qr-scanner"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content class="common-bg">
+  <ion-searchbar (search)="onSearch()" [(ngModel)]="searchString" [showCancelButton]="true"></ion-searchbar>
+  <div class="spinner" *ngIf="loading == true">
+    <ion-spinner name="bubbles"></ion-spinner>
+  </div>
+
+  <h4 text-center *ngIf="trendingProducts.length!=0">Trending Products</h4>
+
+  <!--List of items-->
+  <ion-grid class="list-cards">
+    <ion-row>
+      <ion-col *ngFor="let product of trendingProducts" col-6 class="product"  tappable (click)="viewItem(product)">
+        <div class="card light-bg">
+          <div class="img">
+            <img src="{{ product.image }}" alt="{{ product.name }}">
+          </div>
+          <div class="name">{{ product.name }}</div>
+          <div class="price" text-center>{{ product.salePrice | currency:'USD' }}</div>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

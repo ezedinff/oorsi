@@ -1,0 +1,59 @@
+<ion-header>
+
+  <ion-navbar color="primary">
+    <button ion-button (click)="dismiss()">
+      Close
+    </button>
+    <ion-title>Add Credit Card</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+  <ion-list class="list-form" [formGroup]="myForm">
+    <button (click)="scanCard()" *ngIf="canScan" ion-button center>Scan Card</button>
+
+    <ion-item>
+      <ion-label floating>Card Number</ion-label>
+      <ion-input type="number" formControlName="number" [class.invalid]="!myForm.controls.number.valid  && (myForm.controls.number.dirty || submitAttempt)"></ion-input>
+    </ion-item>
+    <p class="fieldError" *ngIf="myForm.controls.number.errors?.required  && (myForm.controls.number.dirty || submitAttempt)">Card Number Required</p>
+    <p class="fieldError" *ngIf="myForm.controls.number.errors?.remote  && (myForm.controls.number.dirty || submitAttempt)">{{myForm.controls.number.errors?.remote}}</p>
+    <ion-row>
+      <ion-col col-6>
+        <ion-item>
+          <ion-label floating>Exp Month(mm)</ion-label>
+          <ion-input type="number" formControlName="expMonth" [class.invalid]="!myForm.controls.expMonth.valid  && (myForm.controls.expMonth.dirty || submitAttempt)"></ion-input>
+          <p class="fieldError" *ngIf="myForm.controls.expMonth.errors?.required  && (myForm.controls.expMonth.dirty || submitAttempt)">Card Number Required</p>
+          <p class="fieldError" *ngIf="myForm.controls.expMonth.errors?.remote  && (myForm.controls.expMonth.dirty || submitAttempt)">{{myForm.controls.number.errors?.remote}}</p>
+        </ion-item>
+      </ion-col>
+      <ion-col col-6>
+        <ion-item>
+          <ion-label floating>Exp Year (yyyy)</ion-label>
+          <ion-input type="number" formControlName="expYear" [class.invalid]="!myForm.controls.expYear.valid  && (myForm.controls.expYear.dirty || submitAttempt)"></ion-input>
+          <p class="fieldError" *ngIf="myForm.controls.expYear.errors?.required  && (myForm.controls.expYear.dirty || submitAttempt)">Exp year Required</p>
+          <p class="fieldError" *ngIf="myForm.controls.expYear.errors?.remote  && (myForm.controls.expYear.dirty || submitAttempt)">{{myForm.controls.number.errors?.remote}}</p>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-item>
+      <ion-label floating>CVC</ion-label>
+      <ion-input type="number" formControlName="cvc" [class.invalid]="!myForm.controls.cvc.valid  && (myForm.controls.cvc.dirty || submitAttempt)"></ion-input>
+    </ion-item>
+    <p class="fieldError" *ngIf="myForm.controls.cvc.errors?.required  && (myForm.controls.cvc.dirty || submitAttempt)">CVC Required</p>
+    <p class="fieldError" *ngIf="myForm.controls.cvc.errors?.remote  && (myForm.controls.cvc.dirty || submitAttempt)">{{myForm.controls.number.errors?.remote}}</p>
+
+
+
+  </ion-list>
+  <div class="spinner" *ngIf="loading == true">
+    <ion-spinner name="bubbles"></ion-spinner>
+  </div>
+  <ion-item *ngIf="errorText"><label class="invalid">{{errorText}}</label></ion-item>
+
+
+  <button ion-button color="primary" block (click)="submit()" [disabled]="loading">Add Card</button>
+
+</ion-content>

@@ -1,0 +1,28 @@
+<!--
+  Generated template for the FriendSearchPage page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-buttons start>
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>
+      <ion-icon name="logo-facebook"></ion-icon> Search for Friends</ion-title>
+
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <friend-search-input [searchString]="''"></friend-search-input>
+  <ion-list>
+    <oorsi-mobile-friends-item [user]="user" *ngFor="let user of users" (profileEmitter)="openProfile($event)"></oorsi-mobile-friends-item>
+  </ion-list>
+</ion-content>

@@ -1,0 +1,71 @@
+<ion-header>
+
+  <ion-navbar color="primary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Register</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding class="register">
+  <ion-list class="list-form" [formGroup]="myForm">
+    <input type="hidden" formControlName="fbat" />
+
+    <ion-item>
+      <ion-label floating>Email *</ion-label>
+      <ion-input type="email" formControlName="email" [class.invalid]="!myForm.controls.email.valid  && (myForm.controls.email.dirty || submitAttempt)"></ion-input>
+    </ion-item>
+
+    <p class="fieldError" *ngIf="myForm.controls.email.errors?.remote  && (myForm.controls.email.dirty || submitAttempt)">{{myForm.controls.email.errors?.remote}}</p>
+    <p class="fieldError" *ngIf="myForm.controls.email.errors?.required  && (myForm.controls.email.dirty || submitAttempt)">Email required</p>
+
+    <ion-item>
+      <ion-label floating>First Name *</ion-label>
+      <ion-input type="text" formControlName="firstName" [class.invalid]="!myForm.controls.firstName.valid  && (myForm.controls.firstName.dirty || submitAttempt)"></ion-input>
+    </ion-item>
+    <p class="fieldError" *ngIf="myForm.controls.firstName.errors?.required  && (myForm.controls.firstName.dirty || submitAttempt)">First Name required</p>
+
+
+    <ion-item>
+      <ion-label floating>Last Name *</ion-label>
+      <ion-input type="text" formControlName="lastName" [class.invalid]="!myForm.controls.lastName.valid  && (myForm.controls.lastName.dirty || submitAttempt)"></ion-input>
+    </ion-item>
+    <p class="fieldError" *ngIf="myForm.controls.lastName.errors?.required  && (myForm.controls.lastName.dirty || submitAttempt)">Last Name required</p>
+
+    <ion-item>
+      <ion-label floating>Password *</ion-label>
+      <ion-input type="password" formControlName="password" [class.invalid]="!myForm.controls.password.valid  &&  submitAttempt"></ion-input>
+    </ion-item>
+    <p class="fieldError" *ngIf="(myForm.controls.password.errors?.required || myForm.controls.password.errors?.minlength) && submitAttempt">Password must be atleast 6 characters</p>
+    <ion-item>
+      <ion-label>Birth Date (optional)</ion-label>
+      <ion-datetime displayFormat="MMM DD YYYY" formControlName="birthDate"></ion-datetime>
+    </ion-item>
+  </ion-list>
+  <div>
+  </div>
+
+  <div>By signing up, you agree to our <span tappable class="primary-color" (click)="openTermsAndConditions()">OOrsi Terms and Conditions</span>    and that you have read our <span tappable class="primary-color" (click)=" openPrivacyStatement()">Privacy Policy</span>.</div>
+
+
+  <button ion-button color="primary" block (click)="register()" [disabled]="loading">Create Account</button>
+  <!-- <button ion-button icon-left block color="facebook" class="align-left" (click)="onFacebookLoginClick()" [disabled]="loading"
+    [disabled]="loading">
+    <ion-icon name="logo-facebook"></ion-icon>
+    Signin with Facebook
+  </button> -->
+
+  <div class="spinner" *ngIf="loading == true">
+    <ion-spinner name="bubbles"></ion-spinner>
+  </div>
+
+
+</ion-content>
+
+<ion-footer>
+  <div class="align-bottom" padding text-center>
+    Have an account? <span class="bold" color="primary" (click)="login()">Sign in</span>
+  </div>
+</ion-footer>
